@@ -49,12 +49,13 @@ Finally, we'd like you to write up a little bit about what you did and what you 
 
 First, write a short paragraph for each of part 1 and part 2, describing how you implemented each part.
 
-<!-- Second, reflect
-
-- Reflective questions: from extra credit blurb, about how this thing is working?
-    What if instead of having `mark` be generated as a function, it was just a quoted piece of code that got spliced in everywhere it's used?
-    notice that character classes get unrolled. how might that affect performance?
-- reflect briefly on what you found difficult, if anything. alternatively, something you found interesting; or if your experience was great, you can say that too. -->
+Second, reflect briefly on what you found difficult, or alternatively, something you found interesting or surprising. (If your experience was great, you can say that too!)
 
 ## _n. Extra Credit_
 If you have gotten this far and are excited to explore more, there are [a few extra credit ideas](regex.t#L12-L32) in the comments at the top of `regex.t`. _These are highly optional, but can be fun and let you go a bit deeper into your first compiler!_ If you pursue any of these, please also describe what you did or found briefly in your writeup.
+
+Additionally, you can write some reflection on possible extensions or different design choices in the implementation:
+
+What if instead of having `mark` be generated as a function, it was just a quoted piece of code that got spliced in everywhere it's used?
+
+Notice that character classes (e.g., `.`, `%w`, `[a-zA-Z]`, etc.) get unrolled during parsing into conjunctions of many atomic terms. How might that affect performance?

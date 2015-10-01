@@ -10,14 +10,18 @@ local regex = require 'regex'
 -------------------------------------------------------------------------------
 
 local function E(restr, str, start,stop)
+  print('testing: ', restr)
+  print('  on     ', str)
   local re = regex(restr)
   local rstart, rstop = re:find(str)
   if rstart ~= start or rstop ~= stop then
+    --print(re.re)
+    --re.nfa:print()
     error('Test failed:\n'..
           restr..'\n'..
           str..'\n'..
           '  Expected '..tostring(start)..' '..tostring(stop)..'\n'..
-          '  Got      '..tostring(rstart)..' '..tostring(rstop), depth)
+          '  Got      '..tostring(rstart)..' '..tostring(rstop), 2)
   end
 end
 
@@ -49,7 +53,6 @@ E('%^a'                       , 'a^a'                       ,  1,  3 )
 E('a%^'                       , 'a^'                        ,  0,  2 )
 E('a'                         , 'aa'                        ,  0,  1 )
 E('a$'                        , 'a$'                        ,  0,  2 )
-E(''                          , ''                          ,  0,  0 )
 E('a(a)'                      , 'aa'                        ,  0,  2 )
 E('a*(a)'                     , 'aa'                        ,  0,  1 )
 E('(..)*(...)*'               , 'a'                         ,  0,  0 )
@@ -61,7 +64,7 @@ E('(a*)(b?)(bb*)bbb'          , 'aaabbbbbbb'                ,  0,  7 )
 E('(a*)(b?)(bb*)bbba'         , 'aaabbbbbbba'               ,  0, 11 )
 E('a'                         , ''                          ,nil,nil )
 E('((a|a)|a)'                 , 'a'                         ,  0,  1 )
-
+--
 E('(a*)(a|aa)'                , 'aaaa'                      ,  0,  1 )
 E('a*(a.|aa)'                 , 'aaaa'                      ,  0,  2 )
 E('a(b)|c(d)|a(e)f'           , 'aef'                       ,  0,  3 )
@@ -287,3 +290,4 @@ E('.*(%/000).*'                   , '/000'                  ,  0,  4 )
 E('.*(%%000).*'                   , '%000'                  ,  0,  4 )
 E('%%000'                         , '%000'                  ,  0,  4 )
 
+--]]
